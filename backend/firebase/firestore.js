@@ -1,18 +1,18 @@
+require("dotenv").config(); // Load environment variables from .env file
+
 const admin = require("firebase-admin");
-const fs = require("fs");
 
-// Path to the temporary file
-const firebaseKeyPath = "/tmp/firebase-key.json";
+// Parse Firebase credentials from environment variable
+const credentials = JSON.parse(process.env.FIREBASE_CREDENTIALS);
 
-// Write the Firebase credentials from the environment variable to a temporary file
-fs.writeFileSync(firebaseKeyPath, process.env.FIREBASE_CREDENTIALS);
+// Replace all escaped `\\n` with actual newlines `\n`
+credentials.private_key = credentials.private_key.replace(/\\n/g, "\n");
 
-// Load the service account key from the temporary file
-const serviceAccount = require(firebaseKeyPath);
-
+// Initialize Firebase Admin SDK
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(credentials),
 });
 
 const db = admin.firestore();
+
 module.exports = db;

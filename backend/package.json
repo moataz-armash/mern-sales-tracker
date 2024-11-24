@@ -12,10 +12,10 @@
     "nodemon": "^3.1.7"
   },
   "scripts": {
-  "start": "node server.js",
-  "dev": "nodemon server.js"
-},
-"engines": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "engines": {
     "node": "22.11"
   }
 }
