@@ -1,13 +1,18 @@
 const admin = require("firebase-admin");
+const fs = require("fs");
 
-// Load Firebase service account key from file
-const firebaseCredentials = JSON.parse(process.env.FIREBASE_CREDENTIALS);
+// Path to the temporary file
+const firebaseKeyPath = "/tmp/firebase-key.json";
 
-// Initialize Firebase Admin SDK
+// Write the Firebase credentials from the environment variable to a temporary file
+fs.writeFileSync(firebaseKeyPath, process.env.FIREBASE_CREDENTIALS);
+
+// Load the service account key from the temporary file
+const serviceAccount = require(firebaseKeyPath);
+
 admin.initializeApp({
-  credential: admin.credential.cert(firebaseCredentials),
+  credential: admin.credential.cert(serviceAccount),
 });
 
 const db = admin.firestore();
-
 module.exports = db;
