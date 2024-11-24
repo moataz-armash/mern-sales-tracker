@@ -57,6 +57,19 @@ const Form = () => {
       <div className="mb-4 w-full">
         <input
           type="text"
+          placeholder="Customer Name"
+          value={form.customerName}
+          onChange={(e) => setForm({ ...form, customerName: e.target.value })}
+          className="border p-2 rounded w-full"
+          aria-label="Customer Name"
+        />
+        {errors.customerName && (
+          <p className="text-red-500 text-sm">{errors.customerName}</p>
+        )}
+      </div>
+      <div className="mb-4 w-full">
+        <input
+          type="text"
           placeholder="Product Name"
           value={form.productName}
           onChange={(e) => setForm({ ...form, productName: e.target.value })}
