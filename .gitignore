@@ -8,3 +8,4 @@ logs/
 
 # Build
 frontend/build/
+backend/firebase-key.json
