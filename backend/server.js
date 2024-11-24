@@ -6,6 +6,15 @@ const salesRoutes = require("./routes/salesRoutes");
 
 const app = express();
 
+const corsOptions = {
+  origin: [
+    "https://mern-sales-tracker.onrender.com/api/sales",
+    "https://mern-sales-tracker-n2ucapzzb-moatazarmashs-projects.vercel.app",
+  ],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // If cookies are used
+};
+
 // Middleware
 app.use(cors());
 app.use(express.json());
